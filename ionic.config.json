@@ -1,0 +1,7 @@
+{
+  "name": "hotel-booking",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
