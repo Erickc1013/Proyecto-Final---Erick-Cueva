@@ -33,13 +33,16 @@ const Tab1: React.FC = () => {
 
   const formatDate = (dateStr: string) => {
     const date = new Date(dateStr);
-    return date.toLocaleDateString();
+    // Muestra la fecha en formato local (Ecuador)
+    return date.toLocaleDateString('es-EC');
   };
 
   // Simulación de reservas existentes (puedes reemplazar por llamadas reales)
   const existingReservations = [
     { room: '101', from: '2025-08-05', to: '2025-08-08' },
     { room: '102', from: '2025-08-10', to: '2025-08-12' },
+    { room: '104', from: '2025-08-07', to: '2025-08-09' },
+    { room: '107', from: '2025-08-15', to: '2025-08-18' },
   ];
 
   const checkRoomAvailability = (roomId: string) => {
@@ -58,7 +61,9 @@ const Tab1: React.FC = () => {
     });
 
     if (conflict) {
-      setRoomMessage(`❌ Habitación reservada del ${formatDate(conflict.from)} al ${formatDate(conflict.to)}`);
+      setRoomMessage(
+        `❌ Habitación reservada del ${formatDate(conflict.from)} al ${formatDate(conflict.to)}`
+      );
       setIsRoomAvailable(false);
     } else {
       setRoomMessage('✅ Habitación disponible');
@@ -93,7 +98,8 @@ const Tab1: React.FC = () => {
     router.push('/tab2', 'forward');
   };
 
-  const rooms = ['101', '102', '103'];
+  // >>> Habitaciones extendidas 101–110 <<<
+  const rooms = ['101', '102', '103', '104', '105', '106', '107', '108', '109', '110'];
 
   return (
     <IonPage>
@@ -178,7 +184,11 @@ const Tab1: React.FC = () => {
           </IonSelect>
         </IonItem>
 
-        <IonButton expand="full" onClick={handleSubmit} disabled={!isRoomAvailable}>
+        <IonButton
+          expand="full"
+          onClick={handleSubmit}
+          disabled={!isRoomAvailable}
+        >
           Guardar Reserva
         </IonButton>
 
